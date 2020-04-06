@@ -59,7 +59,7 @@ namespace IL2CPPSDKGen.IL2CPP
         public override string ToString()
         {
             var Parameters = BuildParameters();
-            return $"typedef {Type} __stdcall {Name}_Method({Parameters});\n\nstatic {Type}* {Name}({Parameters})\n" + "{" + $"\n{Name}_Method* method = IL2Helper::FindFunction<{Name}_Method>({RVA});\nmethod();";
+            return $"typedef {Type} __stdcall {Name}_Method({Parameters});\n\nstatic {Type}* {Name}({Parameters})\n" + "{" + $"\n{Name}_Method* method = IL2Helper::FindFunction<{Name}_Method>({RVA});\nmethod();\n" + "}";
         }
 
         public IL2CppMethod(string type, string name, string rva, MethodDef def)
