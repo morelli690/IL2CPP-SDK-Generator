@@ -70,7 +70,7 @@ namespace IL2CPPSDKGen.IL2CPP
         private string GenerateClassPayload()
         {
             string details = $"struct {Properties.Name} " + "{\n" + BuildFields() + $"\n{BuildMethods()}\n" + @"};";
-            return $"#include \"Helper.h\"\n\n{details}";
+            return $"#include \".." + @"\" + $"Helper.h\"\n\n{details}";
         }
     }
 }

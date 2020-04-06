@@ -23,7 +23,7 @@ namespace IL2CPPSDKGen.IL2CPP
             string MegaString = null;
             for(int i = 0; i < Parameters.Count(); i++)
             {
-                if (i == Parameters.Count())
+                if (i == Parameters.Count() - 1)
                 {
                     foreach (Dictionary<string, string> dictionary in Parameters)
                     {
