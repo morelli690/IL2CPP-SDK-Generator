@@ -26,7 +26,7 @@ namespace IL2CPPSDKGen
                     SDKGenerator.OpenModule(file);
                 }
 
-                string helperFile = $"#include <Windows.h>\n\nstruct IL2Helper " + "{\n\n" + $"static DWORD64 GetModuleBaseAddress() " + "{\nreturn (DWORD64)GetModuleHandle(\"GameAssembly.dll\");\n}\ntemplate<class T>\n" + $"static T* FindFunction(DWORD64 offset) " + "{\nreturn (T*)(GetModuleBaseAddress() + offset);\n}\n\n};";
+                string helperFile = $"#include <Windows.h>\n\nstruct IL2Helper " + "{\n\n" + $"static DWORD64 GetModuleBaseAddress() " + "{\nreturn (DWORD64)GetModuleHandle(L\"GameAssembly.dll\");\n}\ntemplate<class T>\n" + $"static T* FindFunction(DWORD64 offset) " + "{\nreturn (T*)(GetModuleBaseAddress() + offset);\n}\n\n};";
                 File.WriteAllText("Output\\Helper.h", helperFile);
                 Console.WriteLine("[LOG] Created Helper.h File");
                 Console.WriteLine("You may now close the sdk generator.");
