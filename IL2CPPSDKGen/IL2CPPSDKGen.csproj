@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="dnlib">
-      <HintPath>..\..\..\..\Downloads\Release\Release\netcoreapp3.1\dnlib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Downloads\de4dot-net45 (1)\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -1,0 +1,9 @@
+
+*.dll
+*.exe
+*.pdb
+*.config
+IL2CPPSDKGen/.vs/IL2CPPSDKGen/v16/.suo
+*.cache
+*.txt
+IL2CPPSDKGen/obj/Debug/IL2CPPSDKGen.csproj.CopyComplete

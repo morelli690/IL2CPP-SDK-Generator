@@ -28,10 +28,9 @@ namespace IL2CPPSDKGen.SDKGen
                     if (HandleClasses(Classes))
                     {
                         Console.WriteLine($"[LOG] Saved Classes in {path} || Clearing RVA Cache");
+
                         if (ClearRVA())
-                        {
                             Console.WriteLine("[LOG] Cleared RVA Cache on " + path);
-                        }
                     }
                 }
             }
@@ -51,7 +50,8 @@ namespace IL2CPPSDKGen.SDKGen
                 string NamespaceName = type.Namespace.ToString();
                 if (type.HasMethods)
                 {
-                    if (!Regex.IsMatch(type.Namespace, "(?i)^[a-z]+$")) NamespaceName = $"namespace_{NamespaceCount}";
+                    if (!Regex.IsMatch(type.Namespace, "(?i)^[a-z]+$"))
+                        NamespaceName = $"namespace_{NamespaceCount}";
 
                     Classes.Add(new IL2CppClass(new IL2CppClassProperties(type, NamespaceName)));
                 }
@@ -71,9 +71,8 @@ namespace IL2CPPSDKGen.SDKGen
             try
             {
                 foreach (var meme in Classes)
-                {
                     meme.Save();
-                }
+
                 return true;
             }
             catch(Exception e)

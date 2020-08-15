@@ -12,14 +12,13 @@ namespace IL2CPPSDKGen.IL2CPP
     public class IL2CppClass
     {
         private IL2CppClassProperties Properties { get; set; }
-        
 
         public IL2CppClass(IL2CppClassProperties properties)
         {
             Properties = properties;
         }
-        private string RemoveInvalidChars(string filename)
-        {
+
+        private string RemoveInvalidChars(string filename) {
             return string.Concat(filename.Split(Path.GetInvalidFileNameChars()));
         }
 
@@ -31,19 +30,18 @@ namespace IL2CPPSDKGen.IL2CPP
             string Name = Properties.Namespace.ToString();
             string PropertyName = Properties.Name.ToString();
 
-            if (!Regex.IsMatch(Name, "(?i)^[a-z]+$")) Name = $"namespace_{GlobalUtils.namespaceSaveCount}";
-            if (!Regex.IsMatch(PropertyName, "(?i)^[a-z]+$")) PropertyName = $"class_{GlobalUtils.PropertiesSaveCount}";
+            if (!Regex.IsMatch(Name, "(?i)^[a-z]+$")) 
+                Name = $"namespace_{GlobalUtils.namespaceSaveCount}";
 
-            if (!Directory.Exists($"Output\\{Name.ToString()}"))
-            {
-                Directory.CreateDirectory($"Output\\{Name.ToString()}");
-            }
+            if (!Regex.IsMatch(PropertyName, "(?i)^[a-z]+$")) 
+                PropertyName = $"class_{GlobalUtils.PropertiesSaveCount}";
 
-            
+            Directory.CreateDirectory($"Output\\{Properties.Namespace.ToString()}\\{Name.ToString()}");
+
             string classPayload = GenerateClassPayload();
 
-            Console.WriteLine($"Output\\{Name.ToString()}\\{PropertyName}.h");
-            File.WriteAllText($"Output\\{Name.ToString()}\\{PropertyName}.h", classPayload);
+            Console.WriteLine($"Output\\{Properties.Namespace.ToString()}\\{Name.ToString()}\\{PropertyName}.h");
+            File.WriteAllText($"Output\\{Properties.Namespace.ToString()}\\{Name.ToString()}\\{PropertyName}.h", classPayload);
         }
         private string BuildFields()
         {
@@ -69,8 +67,14 @@ namespace IL2CPPSDKGen.IL2CPP
 
         private string GenerateClassPayload()
         {
-            string details = $"struct {Properties.Name} " + "{\n" + BuildFields() + $"\n{BuildMethods()}\n" + @"};";
-            return $"#include \".." + @"\" + $"Helper.h\"\n\n{details}";
+            StringBuilder builder = new StringBuilder();
+            if (Properties.Definition.IsEnum)
+            {
+                //Support for enum classes
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(Properties.Definition.Fields[0].Name + " -- eNUM");
+            }
+            return null;
         }
     }
 }

@@ -15,16 +15,16 @@ namespace IL2CPPSDKGen
         {
             Console.Title = "IL2CPP SDK Generator";
             Console.WriteLine("[LOG] Looking for files to convert...");
+
+            Directory.CreateDirectory("Input");
+            Directory.CreateDirectory("Output");
+
             if (Directory.GetFiles("Input").Length == 0)
-            {
                 Console.WriteLine("[LOG] Could not find any files to convert. Make sure you put all the dumped dlls inside the Input folder.");
-            }
             else
             {
                 foreach(var file in Directory.GetFiles("Input"))
-                {
                     SDKGenerator.OpenModule(file);
-                }
 
                 string helperFile = $"#include <Windows.h>\n\nstruct IL2Helper " + "{\n\n" + $"static DWORD64 GetModuleBaseAddress() " + "{\nreturn (DWORD64)GetModuleHandle(L\"GameAssembly.dll\");\n}\ntemplate<class T>\n" + $"static T* FindFunction(DWORD64 offset) " + "{\nreturn (T*)(GetModuleBaseAddress() + offset);\n}\n\n};";
                 File.WriteAllText("Output\\Helper.h", helperFile);

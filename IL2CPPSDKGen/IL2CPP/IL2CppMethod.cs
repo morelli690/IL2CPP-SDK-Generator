@@ -18,6 +18,8 @@ namespace IL2CPPSDKGen.IL2CPP
 
         public List<Dictionary<string, string>> Parameters = new List<Dictionary<string, string>>();
 
+        public MethodDef Definition { get; set; }
+
         private string BuildParameters()
         {
             string MegaString = null;
@@ -67,6 +69,7 @@ namespace IL2CPPSDKGen.IL2CPP
             Type = type;
             Name = name;
             RVA = rva;
+            Definition = def;
 
             var parameterCount = 0;
             foreach(var parameter in def.Parameters)

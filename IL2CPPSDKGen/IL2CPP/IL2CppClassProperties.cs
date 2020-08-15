@@ -19,10 +19,13 @@ namespace IL2CPPSDKGen.IL2CPP
 
         public List<IL2CppMethod> Methods = new List<IL2CppMethod>();
 
+        public TypeDef Definition { get; set; }
+
         public IL2CppClassProperties(TypeDef type, string ilnamespace)
         {
             Name = type.Name.ToString();
             Namespace = ilnamespace.ToString();
+            Definition = type;
 
             int methodNumber = 0;
             int fieldNumber = 0;
@@ -62,7 +65,7 @@ namespace IL2CPPSDKGen.IL2CPP
 
                     var attribute = field.CustomAttributes.Find("Il2CppDummyDll.FieldOffsetAttribute");
                     var Offset = attribute.GetField("Offset").Value;
-                    Fields.Add(new IL2CppField(TypeName.ToString(), FieldName.ToString(), Offset.ToString()));
+                    Fields.Add(new IL2CppField(TypeName.ToString(), FieldName.ToString(), Offset.ToString(), field));
                 }
             }
         }
